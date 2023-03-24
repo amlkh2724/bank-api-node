@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
+import cors from 'cors'
 import user from "./routes/userRoutes.js";
 // import accountRoutes from "./routes/accountRoutes.js";
 import colors from "colors";
@@ -9,6 +10,10 @@ import colors from "colors";
 dotenv.config({ path: "./config/config.env" });
 connectDB();
 const app = express();
+
+// 👇️ configure CORS
+app.use(cors());
+
 app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
