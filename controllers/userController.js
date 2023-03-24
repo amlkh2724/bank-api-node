@@ -21,6 +21,8 @@ export const getAllUsers = asyncHandler(async (req, res) => {
     res.status(404).send("error" + error);
   }
 });
+
+//user //id
 export const getUser = asyncHandler(async (req, res, next) => {
   const shop = await User.findById(req.params.id);
 
@@ -179,78 +181,3 @@ export const getUsersByCashAmount = asyncHandler(async (req, res, next) => {
     res.status(404).send("error" + error);
   }
 });
-
-// export const transferUser = asyncHandler(async (req, res, next) => {
-//   const userFrom = await User.findById(req.params.id);
-//   const userTo = await User.findById(req.params.id);
-
-//   userFrom.cash = Number(userFrom.cash) - Number(req.params.cash);
-//   userTo.cash = Number(userFrom.cash) + Number(req.params.cash);
-
-//   const updatedUserFrom = await User.findByIdAndUpdate(req.params.id, userFrom, {
-//     new: true,
-//     runValidators: true,
-//   });
-
-//   const updatedUserTo = await User.findByIdAndUpdate(req.params.id, userTo, {
-//     new: true,
-//     runValidators: true,
-//   });
-
-//   if (!userTo) {
-//     return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
-//   }
-
-//   if (!userFrom) {
-//     return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
-//   }
-
-//   res.status(200).json({
-//     success: true,
-//     data: {updatedUserFrom, updatedUserTo}
-//   });
-// });
-// export const transferUser = asyncHandler(async (req, res, next) => {
-//   const userFrom = await User.findById(req.params.id);
-//   const userTo = await User.findById(req.params.id);
-//   if (!userFrom) {
-//     return next(new Error(`User that ends with '${req.params.id.slice(-6)}' not found`));
-//   }
-
-//   if (!userTo) {
-//     return next(new Error(`User that ends with '${req.params.id.slice(-6)}' not found`));
-//   }
-
-//   const transferAmount = Number(req.body.amount);
-
-//   if (userFrom.cash < transferAmount) {
-//     return next(new Error('Insufficient funds'));
-//   }
-
-//   userFrom.cash -= transferAmount;
-//   userTo.cash += transferAmount;
-
-//   await userFrom.save();
-//   await userTo.save();
-
-//   res.status(200).json({
-//     success: true,
-//     data: userFrom,
-//   });
-// });
-
-// export const withdrawUser = asyncHandler(async (req, res, next) => {
-//   const specificUser = await User.findById(req.params.id);
-
-//   if (!specificUser) {
-//     return next(new Error(`User that ends with '${req.params.id.slice(-6)}' not found`));
-//   }
-
-//   specificUser.cash = Number(specificUser.cash) - Number(req.body.amount);
-//   const user = await specificUser.save();
-
-//   res.status(200).json({
-//     success: true,
-//     data: user,
-//   });
-// });
