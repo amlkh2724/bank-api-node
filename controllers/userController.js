@@ -24,9 +24,9 @@ export const getAllUsers = asyncHandler(async (req, res) => {
 
 //user //id
 export const getUser = asyncHandler(async (req, res, next) => {
-  const shop = await User.findById(req.params.id);
+  const getUserByID = await User.findById(req.params.id);
 
-  if (!shop) {
+  if (!getUserByID) {
     return next(
       new Error(`Shop that end with '${req.params.id.slice(-6)}' not found`)
     );
@@ -34,7 +34,7 @@ export const getUser = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    data: shop,
+    data: getUserByID,
   });
 });
 
@@ -47,20 +47,20 @@ export const getUser = asyncHandler(async (req, res, next) => {
 //   }
 // });
 export const updateById = asyncHandler(async (req, res, next) => {
-  const shop = await User.findByIdAndUpdate(req.params.id, req.body, {
+  const UpadteUserById = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
 
-  if (!shop) {
+  if (!UpadteUserById) {
     return next(
-      new Error(`Shop that end with '${req.params.id.slice(-6)}' not found`)
+      new Error(`UpadteUserById that end with '${req.params.id.slice(-6)}' not found`)
     );
   }
 
   res.status(200).json({
     success: true,
-    data: shop,
+    data: UpadteUserById,
   });
 });
 export const deletebyId = asyncHandler(async (req, res) => {
@@ -69,7 +69,7 @@ export const deletebyId = asyncHandler(async (req, res) => {
   if (!delteById) {
     return next(
       new ErrorResponse(
-        `Shop that ends with '${req.params.id.slice(-6)}' was not found`,
+        `delteById that ends with '${req.params.id.slice(-6)}' was not found`,
         404
       )
     );
